@@ -7,7 +7,5 @@ Written for Python 3, not tested in Python 2.
     python scalecharts.py
 
 
-# How to navigate (gif link)
-http://i.imgur.com/rILNroA.gif
-    
-
+# How to navigate
+![](http://i.imgur.com/rILNroA.gif)
