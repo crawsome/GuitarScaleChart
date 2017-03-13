@@ -3,8 +3,9 @@ import sys
 from tkinter import *
 from collections import OrderedDict
 
-
-#This program creates a guitar scale gui from grid elements, and fills them in color-coded appropriately.
+# This program creates a guitar scale gui from grid elements, and fills them in color-coded appropriately. 
+# https://github.com/crawsome/GuitarScaleChart
+# 2017 Colin Burke, et al contributors from Github :-)
 
 
 # Get Note name from a 0-11 INT
@@ -50,21 +51,21 @@ scales = OrderedDict([
     ('Maj9 chord', [0, 4, 3, 4, 3]),
     ('m9 chord', [0, 3, 4, 3, 4])
     ])
+	
 # returns a scale of 16 notes, from the key tonic + 24
 def makescale(keyroot, keyopt):
     keywheel = []
     keywheel.extend(scales[keyopt])
-
     filler = 0
     # fill array with 16 notes relevant to key and option.
     ourscale = []
     lenvar = len(keywheel)  # of notes we use (2 octaves of key notes)
     for inte in range(lenvar):
         filler += keywheel[inte % len(keywheel)]
-        ourscale.append((filler + getoffset_tonename(keyroot)))
+        ourscale.append(int(filler + getoffset_tonename(keyroot)))
     return ourscale
 
-
+	
 # fetches a default scale
 ourscale = makescale('E ', 'Major')
 
