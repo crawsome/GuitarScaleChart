@@ -7,26 +7,22 @@ from collections import OrderedDict
 # https://github.com/crawsome/GuitarScaleChart
 # 2017 Colin Burke, et al contributors from Github :-)
 
-
-# Get Note name from a 0-11 INT
-def getnotename(tonename):
-    notedict = ['E ', 'F ', 'F#', 'G ', 'Ab', 'A ', 'Bb', 'B ', 'C ', 'Db', 'D ', 'Eb']
-    return notedict[tonename % 12]
-
-
-# Contains int offsets, based on note string, added for convenience, which is simply offset relative to C.
-def getoffset_tonename(tonename):
-    scaleref = {'E ': 0, 'F ': 1, 'F#': 2, 'G ': 3, 'Ab': 4., 'A ': 5, 'Bb': 6, 'B ': 7, 'C ': 8, 'Db': 9, 'D ': 10, \
-                'Eb': 11}
-    return scaleref[tonename]
-
-
-# Return array that is rotated circular
-def rotate(l, n):
-    return l[-n:] + l[:-n]
-
-
-scales = OrderedDict([
+TUNINGS = {
+    'Standard': {
+        'Labels': ['E', 'B', 'G', 'D', 'A', 'E'],
+        'Offset': [0, 7, 3, 10, 5, 0]
+    },
+    'Drop D': {
+        'Labels': ['E', 'B', 'G', 'D', 'A', 'D'],
+        'Offset': [0, 7, 3, 10, 5, 10]
+    },
+    'DADGAD': {
+        'Labels': ['D', 'A', 'G', 'D', 'A', 'D'],
+        'Offset': [10, 5, 3, 10, 5, 10]
+    }
+}
+NOTES = ['E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb']
+SCALES = OrderedDict([
     ('Major', [0, 2, 2, 1, 2, 2, 2, 1]),
     ('Natural minor', [0, 2, 1, 2, 2, 1, 2, 2]),
     ('Harmonic minor', [0, 2, 1, 2, 2, 1, 3, 1]),
@@ -51,11 +47,31 @@ scales = OrderedDict([
     ('Maj9 chord', [0, 4, 3, 4, 3]),
     ('m9 chord', [0, 3, 4, 3, 4])
     ])
-	
+
+def get_tuning_labels():
+    return TUNINGS[str(variable3.get())]['Labels']
+
+def get_tuning_offset():
+    return TUNINGS[str(variable3.get())]['Offset']
+
+# Get Note name from a 0-11 INT
+def getnotename(tonename):
+    return NOTES[tonename % 12]
+
+
+# Contains int offsets, based on note string, added for convenience, which is simply offset relative to C.
+def getoffset_tonename(tonename):
+    return NOTES.index(tonename)
+
+
+# Return array that is rotated circular
+def rotate(l, n):
+    return l[-n:] + l[:-n]
+
 # returns a scale of 16 notes, from the key tonic + 24
 def makescale(keyroot, keyopt):
     keywheel = []
-    keywheel.extend(scales[keyopt])
+    keywheel.extend(SCALES[keyopt])
     filler = 0
     # fill array with 16 notes relevant to key and option.
     ourscale = []
@@ -65,41 +81,32 @@ def makescale(keyroot, keyopt):
         ourscale.append(int(filler + getoffset_tonename(keyroot)))
     return ourscale
 
-	
-# fetches a default scale
-ourscale = makescale('E ', 'Major')
 
-# Used for note offsets
-e = 0
-
-# high e = (e+4), b = (e-1), g = (e+7), d = (e+2),a = (e+9), low e = (e+4)
-# added to each string to offset and identify the notes.
-offsetArray = [e, e + 7, e + 3, e + 10, e + 5, e]
 
 # default e Major
 chartgui = Tk()
-
 # our callback variables that change when menu options are selected
 variable = StringVar(chartgui)
-variable.set('E ')
+variable.set('E')
 variable2 = StringVar(chartgui)
 variable2.set('Major')
-
+variable3 = StringVar(chartgui)
+variable3.set("Standard")
 
 # variable3 = StringVar(chartgui)
 # variable3.set('View 1')
 
-
 # for clearing all our values, used for the "Reset" button.
 def resettable():
     print("Tried to reset!")
+    offset = get_tuning_offset()
     for i in range(0, 25):
         for gss in range(0, 6):
-            Label(chartgui, text=getnotename(i + offsetArray[gss])).grid(row=gss + 2, column=i + 1, padx=0, pady=0)
+            Label(chartgui, text=getnotename(i + offset[gss])).grid(row=gss + 2, column=i + 1, padx=0, pady=0)
 
 
 # redraw our whole scale, the action for the "Apply" button
-def applyit():
+def redraw_fretboard():
     print("Trying to apply!")
     # print("var1 = %s"%variable.get())
     # print("var2 = %s"%variable2.get())
@@ -118,10 +125,15 @@ def applyit():
 
     print (ournotes)
 
+    # For our string (row) labels
+    offset = get_tuning_offset()
+    for gss in range(0, 6):
+        Label(chartgui, text=offset[gss], font="comicsans").grid(row=gss + 2, column=0, padx=10, pady=0)
+
     # draw our whole scale
     for i in range(0, 25):
         for gss in range(0, 6):
-            start = offsetArray[gss]
+            start = offset[gss]
 
             # draw red for roots
             if ourtonic == getnotename(i + start % 12):
@@ -147,22 +159,13 @@ if __name__ == "__main__":
         Label(chartgui, text=i, font='helvetica').grid(row=0, column=i + 1, padx=0, pady=10)
         Label(chartgui, text=i, font='helvetica').grid(row=9, column=i + 1, padx=0, pady=10)
 
-    # For our string (row) labels
-    stringarray = ['E', 'B', 'G', 'D', 'A', 'E']
-    for gss in range(0, 6):
-        Label(chartgui, text=stringarray[gss], font="comicsans").grid(row=gss + 2, column=0, padx=10, pady=0)
-
-    print(ourscale)
+    keymenu = OptionMenu(chartgui, variable, *NOTES).place(x=ourx * 2, y=oury * 12)
+    scalemenu = OptionMenu(chartgui, variable2, *SCALES.keys()).place(x=ourx * 4, y=oury * 12)
+    tuningmenu = OptionMenu(chartgui, variable3, *TUNINGS.keys()).place(x=ourx * 6.5, y=oury * 12)
+    submitbutton = Button(chartgui, text=' Apply ', command=redraw_fretboard).place(x=ourx * 10, y=oury * 12)
+    resetbutton = Button(chartgui, text=' Reset ', command=resettable).place(x=ourx * 12, y=oury * 12)
 
     # draw our whole scale
-    applyit()
-
-    keymenu = OptionMenu(chartgui, variable, 'E ', 'F ', 'F#', 'G ', 'Ab', 'A ', 'Bb', 'B ', 'C ', 'Db', 'D ',
-                         'Eb', ).place(x=ourx * 2, y=oury * 12)
-    scalemenu = OptionMenu(chartgui, variable2, *scales.keys()).place(
-        x=ourx * 4, y=oury * 12)
-    submitbutton = Button(chartgui, text=' Apply ', command=applyit).place(x=ourx * 8, y=oury * 12)
-    resetbutton = Button(chartgui, text=' Reset ', command=resettable).place(x=ourx * 10, y=oury * 12)
-
+    redraw_fretboard()
     chartgui.mainloop()
 
