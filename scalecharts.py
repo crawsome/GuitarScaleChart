@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 import sys
 from tkinter import *
+from collections import OrderedDict
 
 
 #This program creates a guitar scale gui from grid elements, and fills them in color-coded appropriately.
@@ -23,27 +25,36 @@ def rotate(l, n):
     return l[-n:] + l[:-n]
 
 
+scales = OrderedDict([
+    ('Major', [0, 2, 2, 1, 2, 2, 2, 1]),
+    ('Natural minor', [0, 2, 1, 2, 2, 1, 2, 2]),
+    ('Harmonic minor', [0, 2, 1, 2, 2, 1, 3, 1]),
+    ('Melodic minor', [0, 2, 1, 2, 2, 2, 2, 2]),
+    ('Dorian mode', [0, 2, 1, 2, 2, 2, 1, 2]),
+    ('Mixolydian mode', [0, 2, 2, 1, 2, 2, 1, 2]),
+    ('Ahava raba mode', [0, 1, 3, 1, 2, 1, 2, 2]),
+    ('Minor pentatonic', [0, 3, 2, 2, 3, 2]),
+    ('Pentatonic', [0, 2, 2, 3, 2, 3]),
+    ('5 chord', [0, 7]),
+    ('Major chord', [0, 4, 3]),
+    ('Minor chord', [0, 3, 4]),
+    ('Diminished chord', [0, 3, 3]),
+    ('Augmented chord', [0, 4, 4]),
+    ('Sus2 chord', [0, 2, 5]),
+    ('Sus4 chord', [0, 5, 2]),
+    ('Maj7 chord', [0, 4, 3, 4]),
+    ('min7 chord', [0, 3, 4, 3]),
+    ('7 chord', [0, 4, 3, 3]),
+    ('dim7 chord', [0, 3, 3, 3]),
+    ('9 chord', [0, 4, 3, 3, 4]),
+    ('Maj9 chord', [0, 4, 3, 4, 3]),
+    ('m9 chord', [0, 3, 4, 3, 4])
+    ])
 # returns a scale of 16 notes, from the key tonic + 24
 def makescale(keyroot, keyopt):
     keywheel = []
-    if 'Major' == keyopt:
-        keywheel.extend([0, 2, 2, 1, 2, 2, 2, 1])
-    if 'Natural minor' == keyopt:
-        keywheel.extend([0, 2, 1, 2, 2, 1, 2, 2])
-    if 'Harmonic minor' == keyopt:
-        keywheel.extend([0, 2, 1, 2, 2, 1, 3, 1])
-    if 'Melodic minor' == keyopt:
-        keywheel.extend([0, 2, 1, 2, 2, 2, 2, 2])
-    if 'Dorian mode' == keyopt:
-        keywheel.extend([0, 2, 1, 2, 2, 2, 1, 2])
-    if 'Mixolydian mode' == keyopt:
-        keywheel.extend([0, 2, 2, 1, 2, 2, 1, 2])
-    if 'Ahava raba mode' == keyopt:
-        keywheel.extend([0, 1, 3, 1, 2, 1, 2, 2])
-    if 'Minor pentatonic' == keyopt:
-        keywheel.extend([0, 3, 2, 2, 3, 2])
-    if 'Pentatonic' == keyopt:
-        keywheel.extend([0, 2, 2, 3, 2, 3])
+    keywheel.extend(scales[keyopt])
+
     filler = 0
     # fill array with 16 notes relevant to key and option.
     ourscale = []
@@ -147,8 +158,7 @@ def __main():
 
     keymenu = OptionMenu(chartgui, variable, 'E ', 'F ', 'F#', 'G ', 'Ab', 'A ', 'Bb', 'B ', 'C ', 'Db', 'D ',
                          'Eb', ).place(x=ourx * 2, y=oury * 12)
-    scalemenu = OptionMenu(chartgui, variable2, 'Major', 'Natural minor', 'Harmonic minor', 'Melodic minor',
-                           'Dorian mode', 'Mixolydian mode', 'Ahava raba mode', 'Minor pentatonic', 'Pentatonic').place(
+    scalemenu = OptionMenu(chartgui, variable2, *scales.keys()).place(
         x=ourx * 4, y=oury * 12)
     submitbutton = Button(chartgui, text=' Apply ', command=applyit).place(x=ourx * 8, y=oury * 12)
     resetbutton = Button(chartgui, text=' Reset ', command=resettable).place(x=ourx * 10, y=oury * 12)
