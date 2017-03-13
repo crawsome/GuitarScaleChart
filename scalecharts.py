@@ -99,7 +99,7 @@ def resettable():
 
 
 # redraw our whole scale, the action for the "Apply" button
-def applyit():
+def applyit(val):
     print("Trying to apply!")
     # print("var1 = %s"%variable.get())
     # print("var2 = %s"%variable2.get())
@@ -155,13 +155,12 @@ if __name__ == "__main__":
     print(ourscale)
 
     # draw our whole scale
-    applyit()
+    applyit("")
 
     keymenu = OptionMenu(chartgui, variable, 'E ', 'F ', 'F#', 'G ', 'Ab', 'A ', 'Bb', 'B ', 'C ', 'Db', 'D ',
-                         'Eb', ).place(x=ourx * 2, y=oury * 12)
-    scalemenu = OptionMenu(chartgui, variable2, *scales.keys()).place(
+                         'Eb', command=applyit).place(x=ourx * 2, y=oury * 12)
+    scalemenu = OptionMenu(chartgui, variable2, *scales.keys(), command=applyit).place(
         x=ourx * 4, y=oury * 12)
-    submitbutton = Button(chartgui, text=' Apply ', command=applyit).place(x=ourx * 8, y=oury * 12)
     resetbutton = Button(chartgui, text=' Reset ', command=resettable).place(x=ourx * 10, y=oury * 12)
 
     chartgui.mainloop()
