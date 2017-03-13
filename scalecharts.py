@@ -133,7 +133,7 @@ def redraw_fretboard():
     # draw our whole scale
     for i in range(0, 25):
         for gss in range(0, 6):
-            start = get_tuning_offset()[gss]
+            start = offset[gss]
 
             # draw red for roots
             if ourtonic == getnotename(i + start % 12):
