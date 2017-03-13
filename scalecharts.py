@@ -136,7 +136,7 @@ def applyit():
                 Label(chartgui, text=getnotename(i + start)).grid(row=gss + 2, column=i + 1, padx=0, pady=0)
 
 
-def __main():
+if __name__ == "__main__":
     chartgui.geometry('640x280+400+300')
     chartgui.title('GuitarScaleChart - Colin Burke, 2017')
     ourx = 40
@@ -166,5 +166,3 @@ def __main():
 
     chartgui.mainloop()
 
-
-__main()
