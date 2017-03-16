@@ -1,6 +1,6 @@
 # GuitarScaleChart
 A 24-fret guitar scale chart for many popular scales, modes, and keys.  
-Written for Python 3. 
+Written for Python 3.
 
 If you really want to use Python 2, you can [change "tkinter" to "Tkinter" in the import statement.](https://docs.python.org/2/library/tkinter.html)
 
@@ -19,7 +19,10 @@ Check back soon for new features!
  * Harmonic minor
  * Melodic minor
  * Dorian mode
+ * Phrygian mode
+ * Lydian mode
  * Mixolydian mode
+ * Locrian mode
  * Ahava raba mode
  * Minor pentatonic
  * Pentatonic
@@ -35,6 +38,7 @@ Check back soon for new features!
  * Maj7 chord
  * min7 chord
  * 7 chord
+ * min7b5 chord
  * dim7 chord
  * 9 chord
  * Maj9 chord
@@ -47,4 +51,3 @@ Check back soon for new features!
 # About the Author
 
 https://linkedin.com/in/colingburke
-

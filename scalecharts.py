@@ -3,7 +3,7 @@ import sys
 from tkinter import *
 from collections import OrderedDict
 
-# This program creates a guitar scale gui from grid elements, and fills them in color-coded appropriately. 
+# This program creates a guitar scale gui from grid elements, and fills them in color-coded appropriately.
 # https://github.com/crawsome/GuitarScaleChart
 # 2017 Colin Burke, et al contributors from Github :-)
 
@@ -32,7 +32,10 @@ scales = OrderedDict([
     ('Harmonic minor', [0, 2, 1, 2, 2, 1, 3, 1]),
     ('Melodic minor', [0, 2, 1, 2, 2, 2, 2, 2]),
     ('Dorian mode', [0, 2, 1, 2, 2, 2, 1, 2]),
+    ('Phrygian mode', [0, 1, 2, 2, 2, 1, 2, 2]),
+    ('Lydian mode', [0, 2, 2, 2, 1, 2, 2, 1]),
     ('Mixolydian mode', [0, 2, 2, 1, 2, 2, 1, 2]),
+    ('Locrian mode', [0, 1, 2, 2, 1, 2, 2, 2]),
     ('Ahava raba mode', [0, 1, 3, 1, 2, 1, 2, 2]),
     ('Minor pentatonic', [0, 3, 2, 2, 3, 2]),
     ('Pentatonic', [0, 2, 2, 3, 2, 3]),
@@ -46,12 +49,13 @@ scales = OrderedDict([
     ('Maj7 chord', [0, 4, 3, 4]),
     ('min7 chord', [0, 3, 4, 3]),
     ('7 chord', [0, 4, 3, 3]),
+    ('min7b5 chord', [0, 3, 3, 4]),
     ('dim7 chord', [0, 3, 3, 3]),
     ('9 chord', [0, 4, 3, 3, 4]),
     ('Maj9 chord', [0, 4, 3, 4, 3]),
     ('m9 chord', [0, 3, 4, 3, 4])
     ])
-	
+
 # returns a scale of 16 notes, from the key tonic + 24
 def makescale(keyroot, keyopt):
     keywheel = []
@@ -65,7 +69,7 @@ def makescale(keyroot, keyopt):
         ourscale.append(int(filler + getoffset_tonename(keyroot)))
     return ourscale
 
-	
+
 # fetches a default scale
 ourscale = makescale('E ', 'Major')
 
@@ -164,4 +168,3 @@ if __name__ == "__main__":
     resetbutton = Button(chartgui, text=' Reset ', command=resettable).place(x=ourx * 10, y=oury * 12)
 
     chartgui.mainloop()
-
