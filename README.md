@@ -13,7 +13,7 @@ Check back soon for new features!
 ![](http://i.imgur.com/rILNroA.gif)
 
 # Options:
-##Scales:
+## Scales:
  * Major
  * Natural minor
  * Harmonic minor
@@ -27,7 +27,7 @@ Check back soon for new features!
  * Minor pentatonic
  * Pentatonic
 
-##Chords:
+## Chords:
  * 5 chord
  * Major chord
  * Minor chord
