@@ -1,6 +1,7 @@
 # GuitarScaleChart
-A 24-fret guitar scale chart for many popular scales, modes, and keys.  
-Written for Python 3.
+A 24-fret guitar scale chart for many popular scales, modes, and keys.
+Written for Python 3 and uses tk. On some systems tk needs to be installed.
+For linux based systems you can use your package manager and install `python3-tk`.
 
 If you really want to use Python 2, you can [change "tkinter" to "Tkinter" in the import statement.](https://docs.python.org/2/library/tkinter.html)
 
