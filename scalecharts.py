@@ -42,6 +42,7 @@ scales = OrderedDict([
     ('Ahava raba mode', [0, 1, 3, 1, 2, 1, 2, 2]),
     ('Minor pentatonic', [0, 3, 2, 2, 3, 2]),
     ('Pentatonic', [0, 2, 2, 3, 2, 3]),
+    ('Blues', [0, 3, 2, 1, 1, 3]),
     ('5 chord', [0, 7]),
     ('Major chord', [0, 4, 3]),
     ('Minor chord', [0, 3, 4]),
@@ -56,7 +57,10 @@ scales = OrderedDict([
     ('dim7 chord', [0, 3, 3, 3]),
     ('9 chord', [0, 4, 3, 3, 4]),
     ('Maj9 chord', [0, 4, 3, 4, 3]),
-    ('m9 chord', [0, 3, 4, 3, 4])
+    ('m9 chord', [0, 3, 4, 3, 4]),
+    ('11 chord', [0, 4, 3, 3, 4, 3]),
+    ('Maj11 chord', [0, 4, 3, 4, 3, 3]),
+    ('min11 chord', [0, 3, 4, 3, 4, 3]),
 ])
 
 # returns a scale of 16 notes, from the key tonic + 24
