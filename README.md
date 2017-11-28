@@ -27,6 +27,7 @@ Check back soon for new features!
  * Ahava raba mode
  * Minor pentatonic
  * Pentatonic
+ * Blues
 
 ## Chords:
  * 5 chord
@@ -44,6 +45,9 @@ Check back soon for new features!
  * 9 chord
  * Maj9 chord
  * m9 chord
+ * 11 chord
+ * Maj11 chord
+ * min11 chords
 
 # If you liked it:
 
