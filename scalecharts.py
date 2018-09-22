@@ -19,7 +19,7 @@ def getnotename(tonename):
 # is simply offset relative to C.
 def getoffset_tonename(tonename):
     scaleref = {
-        'E ': 0, 'F ': 1, 'F#': 2, 'G ': 3, 'Ab': 4., 'A ': 5, 'Bb': 6, 'B ': 7, 'C ': 8, 'Db': 9, 'D ': 10,
+        'E ': 0, 'F ': 1, 'F#': 2, 'G ': 3, 'Ab': 4, 'A ': 5, 'Bb': 6, 'B ': 7, 'C ': 8, 'Db': 9, 'D ': 10,
                 'Eb': 11}
     return scaleref[tonename]
 
