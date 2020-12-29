@@ -51,7 +51,7 @@ Check back soon for new features!
 
 # If you liked it:
 
-[Donate](https://www.paypal.me/gitcraw), so I can dedicate more time to projects like this.
+[Contribute](https://colinburke.com/contribute), so I can dedicate more time to projects like this.
 
 # About the Author
 
